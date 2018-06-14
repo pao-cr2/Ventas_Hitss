@@ -1,0 +1,51 @@
+﻿@model HitssMVC.ServiceReference.Producto
+
+@{
+    ViewBag.Title = "BuscarProducto";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BuscarProducto</h2>
+
+<div>
+    <h4>Producto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Descripcion
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion_pro)
+        </dd>
+
+        <dt>
+            Categoria
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Categoria)
+        </dd>
+
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Producto)
+        </dd>
+
+        <dt>
+           Precio Unitario
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecioUnitario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "UpdateProducto", new {  id = Model.Id_Producto  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MiIngresoHitssModelStoreContainer" CdmEntityContainer="MiIngresoHitsEntities">
+    <EntitySetMapping Name="Cliente">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Cliente">
+        <MappingFragment StoreEntitySet="Cliente">
+          <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />
+          <ScalarProperty Name="Nombre_cli" ColumnName="Nombre_cli" />
+          <ScalarProperty Name="Apellido_cli" ColumnName="Apellido_cli" />
+          <ScalarProperty Name="Direccion_cli" ColumnName="Direccion_cli" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="CC" ColumnName="CC" />
+          <ScalarProperty Name="Celular_cli" ColumnName="Celular_cli" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetalleOrdenPedido">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.DetalleOrdenPedido">
+        <MappingFragment StoreEntitySet="DetalleOrdenPedido">
+          <ScalarProperty Name="Id_ordenp" ColumnName="Id_ordenp" />
+          <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+          <ScalarProperty Name="Descripcion_pro" ColumnName="Descripcion_pro" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Factura">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Factura">
+        <MappingFragment StoreEntitySet="Factura">
+          <ScalarProperty Name="Id_factura" ColumnName="Id_factura" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />
+          <ScalarProperty Name="Id_ordenpedido" ColumnName="Id_ordenpedido" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenPedido">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.OrdenPedido">
+        <MappingFragment StoreEntitySet="OrdenPedido">
+          <ScalarProperty Name="Id_ordenPedido" ColumnName="Id_ordenPedido" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="Id_cliente" ColumnName="Id_cliente" />
+          <ScalarProperty Name="Nombre_cli" ColumnName="Nombre_cli" />
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="total" ColumnName="total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Presentacion">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Presentacion">
+        <MappingFragment StoreEntitySet="Presentacion">
+          <ScalarProperty Name="Id_pres" ColumnName="Id_pres" />
+          <ScalarProperty Name="nombre_pres" ColumnName="nombre_pres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Producto">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Producto">
+        <MappingFragment StoreEntitySet="Producto">
+          <ScalarProperty Name="Id_producto" ColumnName="Id_producto" />
+          <ScalarProperty Name="Descripcion_pro" ColumnName="Descripcion_pro" />
+          <ScalarProperty Name="Precio_venta" ColumnName="Precio_venta" />
+          <ScalarProperty Name="Precio_compra" ColumnName="Precio_compra" />
+          <ScalarProperty Name="fecha_venc" ColumnName="fecha_venc" />
+          <ScalarProperty Name="stock" ColumnName="stock" />
+          <ScalarProperty Name="Id_proveedor" ColumnName="Id_proveedor" />
+          <ScalarProperty Name="Id_pres" ColumnName="Id_pres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proveedor">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Proveedor">
+        <MappingFragment StoreEntitySet="Proveedor">
+          <ScalarProperty Name="Id_proveedor" ColumnName="Id_proveedor" />
+          <ScalarProperty Name="nombre_prov" ColumnName="nombre_prov" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="MiIngresoHitssModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuario">
+          <ScalarProperty Name="Id_usuario" ColumnName="Id_usuario" />
+          <ScalarProperty Name="Id_proveedor" ColumnName="Id_proveedor" />
+          <ScalarProperty Name="nivel_usu" ColumnName="nivel_usu" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

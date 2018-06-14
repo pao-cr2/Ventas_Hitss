@@ -1,0 +1,58 @@
+﻿@model IEnumerable<HitssMVC.ServiceReference.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>Clientes </h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                Nombre
+            </th>
+            <th>
+                Apellido
+            </th>
+            <th>
+                Direccion
+            </th>
+            <th>
+                Telefono
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.List)
+        {
+        <tr>
+            <td>
+                @item.Nombre_cli
+            </td>
+            <td>
+                @item.Apellido_cli
+            </td>
+            <td>
+                @item.Direccion_cli
+            </td>
+
+            <td>
+                @item.Telefono_cli
+            </td>
+            <td>
+                @item.DNI_cli
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "UpdateCliente", new { id = item.Id_Cliente })
+                @Html.ActionLink("Detalles", "BuscarCliente", new { id = item.Id_Cliente })
+                @Html.ActionLink("Eliminar", "deleteCliente", new { id = item.Id_Cliente })
+            </td>
+        </tr>
+        }
+
+    </table>

@@ -1,0 +1,212 @@
+
+/****** REPORTE CLIENTES -VENTAS ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+create proc [dbo].[sp_Reporte]
+@fecha date
+as
+SELECT Descripcion_pro, PrecioUnitario,cli.Nombre_cli, cli.Apellido_cli  FROM Producto pro
+INNER JOIN	Detalle_Venta de on (pro.Id_Producto=de.Id_Producto)
+INNER JOIN	Venta ven on (de.Id_Venta=ven.Id_Venta)
+INNER JOIN	Cliente cli on (ven.Id_Cliente=ven.Id_Cliente)
+WHERE ven.Fecha_venta=@fecha
+
+GO
+
+
+
+/**TABLAS**/
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Categoria](
+	[Id_Categoria] int NOT NULL IDENTITY(1,1),
+	[Nombre_categ] [nvarchar](50) NOT NULL,
+	[Descripcion_categ] text NOT NULL,
+ CONSTRAINT [PK__categ] PRIMARY KEY CLUSTERED 
+(
+	[Id_Categoria] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[cliente]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Cliente](
+	[Id_Cliente] int  NOT NULL IDENTITY(1,1),
+	[Nombre_cli] [varchar](50) NOT NULL,
+	[Apellido_cli] [varchar](60) NOT NULL,
+	[Direccion_cli] [varchar](50) NOT NULL,
+	[Telefono_cli] [varchar](30) NOT NULL,
+	[DNI_cli] [numeric](10, 0) NOT NULL,
+ CONSTRAINT [PK_Cliente] PRIMARY KEY CLUSTERED 
+(
+	[Id_Cliente] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+UNIQUE NONCLUSTERED 
+(
+	[DNI_cli] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[detalleVenta]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Detalle_Venta](
+	[Id_Detalle] [int] IDENTITY(1,1) NOT NULL,
+	[Id_Factura] int NOT NULL,
+	[Id_Venta] int NOT NULL,
+	[SubTotal] [real] NOT NULL,
+	[Id_Producto] int NOT NULL,
+	[Cantidad_venta] [int] NOT NULL,
+ CONSTRAINT [PK_Detalle_Venta] PRIMARY KEY CLUSTERED 
+(
+	[Id_Detalle] ASC,
+	[Id_Factura] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[factura]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Factura](
+	[Id_Factura] int IDENTITY(1,1) NOT NULL,
+	[Fecha_fac] [date] NOT NULL,
+	[IVA] [real] NOT NULL,
+	[Total] [real] NOT NULL,
+	[Id_Pago] [int] ,
+	[Descuento] [money] NULL,
+ CONSTRAINT [PK__Factura] PRIMARY KEY CLUSTERED 
+(
+	[Id_Factura] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[modoPago]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Tipo_Pago](
+	[Id_Pago] [int] IDENTITY(1,1) NOT NULL,
+	[Nombre_pago] [nvarchar](25) NOT NULL,
+	[Detalles_pago] text NULL,
+ CONSTRAINT [PK__Tipo_Pago] PRIMARY KEY CLUSTERED 
+(
+	[Id_Pago] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[producto]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Producto](
+	[Id_Producto] int NOT NULL IDENTITY(1,1),
+	[Descripcion_pro] [nvarchar](50) NOT NULL,
+	[PrecioUnitario] [money] NOT NULL,
+	[Id_Categoria] int NOT NULL,
+ CONSTRAINT [PK__ProductO] PRIMARY KEY CLUSTERED 
+(
+	[Id_Producto] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[vendedor]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Empleado](
+	[Id_Empleado] int NOT NULL IDENTITY(1,1),
+	[Nombre_emp] [nvarchar](30) NOT NULL,
+	[Apellido_emp] [nvarchar](50) NOT NULL,
+	[DNI_emp] [numeric](10, 0) NOT NULL,
+	[Telefono_emp] [nvarchar](20) NOT NULL,
+ CONSTRAINT [PK__vendedor] PRIMARY KEY CLUSTERED 
+(
+	[Id_Empleado] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[venta]    Script Date: 18/12/2016 21:54:08 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Venta](
+	[Id_Venta] int IDENTITY(1,1) NOT NULL,
+	[Total] [real] NOT NULL,
+	[Id_Cliente] int NOT NULL,
+	[Id_Empleado] int NOT NULL,
+	[Fecha_venta] [date] NOT NULL,
+	[Descuento_venta] [money] NULL,
+	[IVA] [money] NOT NULL,
+ CONSTRAINT [PK__Pedido_venta] PRIMARY KEY CLUSTERED 
+(
+	[Id_Venta] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+ALTER TABLE [dbo].[Detalle_Venta]  WITH CHECK ADD  CONSTRAINT [FK__DetalleVenta] FOREIGN KEY([Id_Venta])
+REFERENCES [dbo].[Venta] ([Id_Venta])
+GO
+ALTER TABLE [dbo].[Detalle_Venta] CHECK CONSTRAINT [FK__DetalleVenta]
+GO
+ALTER TABLE [dbo].[Detalle_Venta]  WITH CHECK ADD  CONSTRAINT [FK_DetalleFac] FOREIGN KEY([Id_Factura])
+REFERENCES [dbo].[Factura] ([Id_Factura])
+GO
+ALTER TABLE [dbo].[Detalle_Venta] CHECK CONSTRAINT [FK_DetalleFac]
+GO
+ALTER TABLE [dbo].[Detalle_Venta]  WITH CHECK ADD  CONSTRAINT [FK_Detalleventa_producto] FOREIGN KEY([Id_Producto])
+REFERENCES [dbo].[Producto] ([Id_Producto])
+GO
+ALTER TABLE [dbo].[Detalle_Venta] CHECK CONSTRAINT [FK_Detalleventa_producto]
+GO
+ALTER TABLE [dbo].[Factura]  WITH CHECK ADD  CONSTRAINT [FK_factura_Pago] FOREIGN KEY([Id_Pago])
+REFERENCES [dbo].[Tipo_Pago] ([Id_Pago])
+GO
+ALTER TABLE [dbo].[Factura] CHECK CONSTRAINT [FK_factura_Pago]
+GO
+ALTER TABLE [dbo].[Producto]  WITH CHECK ADD  CONSTRAINT [FK__producto_cate] FOREIGN KEY([Id_Categoria])
+REFERENCES [dbo].[Categoria] ([Id_Categoria])
+GO
+ALTER TABLE [dbo].[Producto] CHECK CONSTRAINT [FK__producto_cate]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_venta_cliente] FOREIGN KEY([Id_Cliente])
+REFERENCES [dbo].[Cliente] ([Id_Cliente])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_venta_cliente]
+GO
+ALTER TABLE [dbo].[Venta]  WITH CHECK ADD  CONSTRAINT [FK_venta_empleado] FOREIGN KEY([Id_Empleado])
+REFERENCES [dbo].[Empleado] ([Id_Empleado])
+GO
+ALTER TABLE [dbo].[Venta] CHECK CONSTRAINT [FK_venta_empleado]
+GO
+USE [master]
+GO
+ALTER DATABASE [Hitss] SET  READ_WRITE 
+GO

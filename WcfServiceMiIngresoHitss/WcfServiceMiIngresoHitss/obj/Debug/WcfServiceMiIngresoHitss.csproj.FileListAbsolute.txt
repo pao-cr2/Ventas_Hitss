@@ -1,0 +1,12 @@
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\WcfServiceMiIngresoHitss.dll.config
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\WcfServiceMiIngresoHitss.dll
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\WcfServiceMiIngresoHitss.pdb
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\EntityFramework.dll
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\EntityFramework.SqlServer.dll
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\EntityFramework.xml
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\bin\EntityFramework.SqlServer.xml
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\obj\Debug\WcfServiceMiIngresoHitss.csprojAssemblyReference.cache
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\obj\Debug\WcfServiceMiIngresoHitss.csproj.CoreCompileInputs.cache
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\obj\Debug\WcfServiceMiIngresoHitss.csproj.CopyComplete
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\obj\Debug\WcfServiceMiIngresoHitss.dll
+C:\Users\Gemelas\Source\Repos\WcfServiceMiIngresoHitss\WcfServiceMiIngresoHitss\obj\Debug\WcfServiceMiIngresoHitss.pdb

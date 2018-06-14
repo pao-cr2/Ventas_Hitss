@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HitssModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categoria">
+    <Key>
+      <PropertyRef Name="Id_Categoria" />
+    </Key>
+    <Property Name="Id_Categoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_categ" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion_categ" Type="text" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id_Cliente" />
+    </Key>
+    <Property Name="Id_Cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_cli" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellido_cli" Type="varchar" MaxLength="60" Nullable="false" />
+    <Property Name="Direccion_cli" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefono_cli" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="DNI_cli" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Detalle_Venta">
+    <Key>
+      <PropertyRef Name="Id_Detalle" />
+      <PropertyRef Name="Id_Factura" />
+    </Key>
+    <Property Name="Id_Detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Id_Factura" Type="int" Nullable="false" />
+    <Property Name="Id_Venta" Type="int" Nullable="false" />
+    <Property Name="SubTotal" Type="real" Nullable="false" />
+    <Property Name="Id_Producto" Type="int" Nullable="false" />
+    <Property Name="Cantidad_venta" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="Id_Empleado" />
+    </Key>
+    <Property Name="Id_Empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_emp" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Apellido_emp" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DNI_emp" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Telefono_emp" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id_Factura" />
+    </Key>
+    <Property Name="Id_Factura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha_fac" Type="date" Nullable="false" />
+    <Property Name="IVA" Type="real" Nullable="false" />
+    <Property Name="Total" Type="real" Nullable="false" />
+    <Property Name="Id_Pago" Type="int" />
+    <Property Name="Descuento" Type="money" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id_Producto" />
+    </Key>
+    <Property Name="Id_Producto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion_pro" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PrecioUnitario" Type="money" Nullable="false" />
+    <Property Name="Id_Categoria" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Tipo_Pago">
+    <Key>
+      <PropertyRef Name="Id_Pago" />
+    </Key>
+    <Property Name="Id_Pago" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre_pago" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Detalles_pago" Type="text" />
+  </EntityType>
+  <EntityType Name="Venta">
+    <Key>
+      <PropertyRef Name="Id_Venta" />
+    </Key>
+    <Property Name="Id_Venta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Total" Type="real" Nullable="false" />
+    <Property Name="Id_Cliente" Type="int" Nullable="false" />
+    <Property Name="Id_Empleado" Type="int" Nullable="false" />
+    <Property Name="Fecha_venta" Type="date" Nullable="false" />
+    <Property Name="Descuento_venta" Type="money" />
+    <Property Name="IVA" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="HitssModelStoreContainer">
+    <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detalle_Venta" EntityType="Self.Detalle_Venta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tipo_Pago" EntityType="Self.Tipo_Pago" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

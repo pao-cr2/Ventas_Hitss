@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiIngresoHitssModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id_cliente" />
+    </Key>
+    <Property Name="Id_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre_cli" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Apellido_cli" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Direccion_cli" Type="String" MaxLength="65" FixedLength="false" Unicode="false" />
+    <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CC" Type="Int32" />
+    <Property Name="Celular_cli" Type="Int32" />
+    <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrdenPedido" Relationship="Self.pk_Id_cliente" FromRole="Cliente" ToRole="OrdenPedido" />
+    <NavigationProperty Name="OrdenPedido1" Relationship="Self.pk_Id_clis" FromRole="Cliente" ToRole="OrdenPedido" />
+  </EntityType>
+  <EntityType Name="DetalleOrdenPedido">
+    <Key>
+      <PropertyRef Name="Id_ordenp" />
+    </Key>
+    <Property Name="Id_ordenp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id_producto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion_pro" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="cantidad" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="precio_venta" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="Producto" Relationship="Self.pk_Id_pro" FromRole="DetalleOrdenPedido" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id_factura" />
+    </Key>
+    <Property Name="Id_factura" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Id_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id_ordenpedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="total" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrdenPedido" Relationship="Self.pk_fac_pedi" FromRole="Factura" ToRole="OrdenPedido" />
+  </EntityType>
+  <EntityType Name="OrdenPedido">
+    <Key>
+      <PropertyRef Name="Id_ordenPedido" />
+    </Key>
+    <Property Name="Id_ordenPedido" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Id_cliente" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Nombre_cli" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Id_usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="total" Type="Int32" />
+    <NavigationProperty Name="Cliente" Relationship="Self.pk_Id_cliente" FromRole="OrdenPedido" ToRole="Cliente" />
+    <NavigationProperty Name="Cliente1" Relationship="Self.pk_Id_clis" FromRole="OrdenPedido" ToRole="Cliente" />
+    <NavigationProperty Name="Factura" Relationship="Self.pk_fac_pedi" FromRole="OrdenPedido" ToRole="Factura" />
+  </EntityType>
+  <EntityType Name="Presentacion">
+    <Key>
+      <PropertyRef Name="Id_pres" />
+    </Key>
+    <Property Name="Id_pres" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_pres" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.pk_Id_presentacion" FromRole="Presentacion" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id_producto" />
+    </Key>
+    <Property Name="Id_producto" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Descripcion_pro" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Precio_venta" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Precio_compra" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="fecha_venc" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="stock" Type="Int32" Nullable="false" />
+    <Property Name="Id_proveedor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Id_pres" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DetalleOrdenPedido" Relationship="Self.pk_Id_pro" FromRole="Producto" ToRole="DetalleOrdenPedido" />
+    <NavigationProperty Name="Presentacion" Relationship="Self.pk_Id_presentacion" FromRole="Producto" ToRole="Presentacion" />
+    <NavigationProperty Name="Proveedor" Relationship="Self.pk_Id_prove" FromRole="Producto" ToRole="Proveedor" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="Id_proveedor" />
+    </Key>
+    <Property Name="Id_proveedor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nombre_prov" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="celular" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Producto" Relationship="Self.pk_Id_prove" FromRole="Proveedor" ToRole="Producto" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id_usuario" />
+    </Key>
+    <Property Name="Id_usuario" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Id_proveedor" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="nivel_usu" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="activo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="pk_Id_cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id_cliente" />
+      </Principal>
+      <Dependent Role="OrdenPedido">
+        <PropertyRef Name="Id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_clis">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id_cliente" />
+      </Principal>
+      <Dependent Role="OrdenPedido">
+        <PropertyRef Name="Id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_pro">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="DetalleOrdenPedido" Type="Self.DetalleOrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="Id_producto" />
+      </Principal>
+      <Dependent Role="DetalleOrdenPedido">
+        <PropertyRef Name="Id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_fac_pedi">
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPedido">
+        <PropertyRef Name="Id_ordenPedido" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="Id_ordenpedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_presentacion">
+    <End Role="Presentacion" Type="Self.Presentacion" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presentacion">
+        <PropertyRef Name="Id_pres" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Id_pres" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_prove">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Id_proveedor" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MiIngresoHitsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" />
+    <EntitySet Name="DetalleOrdenPedido" EntityType="Self.DetalleOrdenPedido" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" />
+    <EntitySet Name="OrdenPedido" EntityType="Self.OrdenPedido" />
+    <EntitySet Name="Presentacion" EntityType="Self.Presentacion" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+    <AssociationSet Name="pk_Id_cliente" Association="Self.pk_Id_cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_clis" Association="Self.pk_Id_clis">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_pro" Association="Self.pk_Id_pro">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="DetalleOrdenPedido" EntitySet="DetalleOrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_fac_pedi" Association="Self.pk_fac_pedi">
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_presentacion" Association="Self.pk_Id_presentacion">
+      <End Role="Presentacion" EntitySet="Presentacion" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_prove" Association="Self.pk_Id_prove">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

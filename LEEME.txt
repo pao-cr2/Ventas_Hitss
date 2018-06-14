@@ -1,0 +1,7 @@
+Buenas tardes
+
+El web service de denomina WcfServiceMiIngresoHitss
+la aplicacion en la arquetectura MVC "HitssMVC" y la base de datos "BASE"
+
+Paola Andrea Cuervo Rodriguez
+Ingeniera de sistemas

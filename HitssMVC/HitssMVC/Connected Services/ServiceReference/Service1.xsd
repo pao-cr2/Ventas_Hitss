@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceMiIngresoHitss.Modelo" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceMiIngresoHitss.Modelo" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Producto">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Descripcion_pro" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id_Categoria" type="xs:int" />
+      <xs:element minOccurs="0" name="Id_Producto" type="xs:int" />
+      <xs:element minOccurs="0" name="PrecioUnitario" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Producto" nillable="true" type="tns:Producto" />
+  <xs:complexType name="ArrayOfProducto">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Producto" nillable="true" type="tns:Producto" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProducto" nillable="true" type="tns:ArrayOfProducto" />
+  <xs:complexType name="Cliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Apellido_cli" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DNI_cli" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Direccion_cli" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id_Cliente" type="xs:int" />
+      <xs:element minOccurs="0" name="Nombre_cli" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefono_cli" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Cliente" nillable="true" type="tns:Cliente" />
+  <xs:complexType name="ArrayOfCliente">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Cliente" nillable="true" type="tns:Cliente" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCliente" nillable="true" type="tns:ArrayOfCliente" />
+</xs:schema>

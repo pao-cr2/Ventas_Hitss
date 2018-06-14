@@ -1,0 +1,67 @@
+﻿@model HitssMVC.ServiceReference.Cliente
+
+@{
+    ViewBag.Title = "BuscarCliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>BuscarCliente</h2>
+
+<div>
+    <h4>Cliente</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido_cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido_cli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DNI_cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DNI_cli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion_cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion_cli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Id_Cliente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id_Cliente)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre_cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre_cli)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono_cli)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono_cli)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

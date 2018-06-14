@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MiIngresoHitssModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cliente">
+    <Key>
+      <PropertyRef Name="Id_cliente" />
+    </Key>
+    <Property Name="Id_cliente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Nombre_cli" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellido_cli" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Direccion_cli" Type="varchar" MaxLength="65" />
+    <Property Name="sexo" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="CC" Type="int" />
+    <Property Name="Celular_cli" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="DetalleOrdenPedido">
+    <Key>
+      <PropertyRef Name="Id_ordenp" />
+    </Key>
+    <Property Name="Id_ordenp" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id_producto" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Descripcion_pro" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="cantidad" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="precio_venta" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="Factura">
+    <Key>
+      <PropertyRef Name="Id_factura" />
+    </Key>
+    <Property Name="Id_factura" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="Id_cliente" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id_ordenpedido" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="total" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrdenPedido">
+    <Key>
+      <PropertyRef Name="Id_ordenPedido" />
+    </Key>
+    <Property Name="Id_ordenPedido" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="fecha" Type="datetime" Nullable="false" />
+    <Property Name="Id_cliente" Type="varchar" MaxLength="10" />
+    <Property Name="Nombre_cli" Type="varchar" MaxLength="40" />
+    <Property Name="Id_usuario" Type="varchar" MaxLength="10" />
+    <Property Name="total" Type="int" />
+  </EntityType>
+  <EntityType Name="Presentacion">
+    <Key>
+      <PropertyRef Name="Id_pres" />
+    </Key>
+    <Property Name="Id_pres" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="nombre_pres" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Producto">
+    <Key>
+      <PropertyRef Name="Id_producto" />
+    </Key>
+    <Property Name="Id_producto" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Descripcion_pro" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Precio_venta" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Precio_compra" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="fecha_venc" Type="datetime" Nullable="false" />
+    <Property Name="stock" Type="int" Nullable="false" />
+    <Property Name="Id_proveedor" Type="varchar" MaxLength="10" />
+    <Property Name="Id_pres" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Proveedor">
+    <Key>
+      <PropertyRef Name="Id_proveedor" />
+    </Key>
+    <Property Name="Id_proveedor" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="nombre_prov" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="celular" Type="char" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id_usuario" />
+    </Key>
+    <Property Name="Id_usuario" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Id_proveedor" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="nivel_usu" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="login" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="activo" Type="varchar" MaxLength="2" Nullable="false" />
+  </EntityType>
+  <Association Name="pk_fac_pedi">
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="1" />
+    <End Role="Factura" Type="Self.Factura" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OrdenPedido">
+        <PropertyRef Name="Id_ordenPedido" />
+      </Principal>
+      <Dependent Role="Factura">
+        <PropertyRef Name="Id_ordenpedido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_cliente">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id_cliente" />
+      </Principal>
+      <Dependent Role="OrdenPedido">
+        <PropertyRef Name="Id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_clis">
+    <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+    <End Role="OrdenPedido" Type="Self.OrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cliente">
+        <PropertyRef Name="Id_cliente" />
+      </Principal>
+      <Dependent Role="OrdenPedido">
+        <PropertyRef Name="Id_cliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_presentacion">
+    <End Role="Presentacion" Type="Self.Presentacion" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Presentacion">
+        <PropertyRef Name="Id_pres" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Id_pres" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_pro">
+    <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+    <End Role="DetalleOrdenPedido" Type="Self.DetalleOrdenPedido" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Producto">
+        <PropertyRef Name="Id_producto" />
+      </Principal>
+      <Dependent Role="DetalleOrdenPedido">
+        <PropertyRef Name="Id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="pk_Id_prove">
+    <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+    <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Proveedor">
+        <PropertyRef Name="Id_proveedor" />
+      </Principal>
+      <Dependent Role="Producto">
+        <PropertyRef Name="Id_proveedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MiIngresoHitssModelStoreContainer">
+    <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DetalleOrdenPedido" EntityType="Self.DetalleOrdenPedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Factura" EntityType="Self.Factura" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrdenPedido" EntityType="Self.OrdenPedido" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Presentacion" EntityType="Self.Presentacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="pk_fac_pedi" Association="Self.pk_fac_pedi">
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+      <End Role="Factura" EntitySet="Factura" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_cliente" Association="Self.pk_Id_cliente">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_clis" Association="Self.pk_Id_clis">
+      <End Role="Cliente" EntitySet="Cliente" />
+      <End Role="OrdenPedido" EntitySet="OrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_presentacion" Association="Self.pk_Id_presentacion">
+      <End Role="Presentacion" EntitySet="Presentacion" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_pro" Association="Self.pk_Id_pro">
+      <End Role="Producto" EntitySet="Producto" />
+      <End Role="DetalleOrdenPedido" EntitySet="DetalleOrdenPedido" />
+    </AssociationSet>
+    <AssociationSet Name="pk_Id_prove" Association="Self.pk_Id_prove">
+      <End Role="Proveedor" EntitySet="Proveedor" />
+      <End Role="Producto" EntitySet="Producto" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

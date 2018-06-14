@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HitssMVC.ServiceReference.Producto>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "InsertProducto")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Descripcion
+        </th>
+        <th>
+           Categoria
+        </th>
+        <th>
+            Producto
+        </th>
+        <th>
+            Precio Unitario
+        </th>
+       
+    </tr>
+
+@foreach (var item in ViewBag.List)
+{
+    <tr>
+        <td>
+            @item.Descripcion_pro
+        </td>
+        <td>
+            @item.Id_Categoria
+        </td>
+        <td>
+            @item.Id_Producto
+        </td>
+        <td>
+            @item.PrecioUnitario
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "UpdateProducto", new { id = item.Id_Producto }) 
+            @Html.ActionLink("Detalles", "BuscarProducto", new { id = item.Id_Producto }) 
+            @Html.ActionLink("Eliminar", "deleteProdcuto", new { id = item.Id_Producto })
+        </td>
+    </tr>
+}
+
+</table>
